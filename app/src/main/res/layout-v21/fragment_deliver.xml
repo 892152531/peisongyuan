@@ -2,15 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.peisongyuan.Order">
-
-
+    tools:context="com.example.administrator.peisongyuan.End_sent_page.Deliver">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="我的"
-        android:id="@+id/textView2" />
+        android:text="已转接"
+        android:id="@+id/textView3" />
+
 
 </FrameLayout>

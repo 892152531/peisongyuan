@@ -1,20 +1,26 @@
 package com.example.administrator.peisongyuan;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.administrator.peisongyuan.Order_top.End_sent;
 import com.example.administrator.peisongyuan.Order_top.Sent_in;
 import com.example.administrator.peisongyuan.Order_top.Un_sent;
+
+import java.util.List;
 
 
 public class Order extends Fragment{
@@ -32,15 +38,21 @@ public class Order extends Fragment{
     private RadioGroup Order_top;
     private com.example.administrator.peisongyuan.Order_top.Sent_in sent_in;
     private com.example.administrator.peisongyuan.Order_top.Un_sent un_sent;
-//    private com.example.administrator.peisongyuan.Order_top.End_sent end_sent;
     private com.example.administrator.peisongyuan.Order_top.End_sent end_sent;
     private LayoutInflater inflater;
+    private ViewPager ViewPager;
+    private RadioGroup group;
+    ViewPager OrderActivityViewPager;
+    BottomNavigationView bottomNavView;
+    OrderViewAdapt adapter;
 
 
     // 缓存Fragment view
     private View rootView;
     private static Order order;
-
+    private List<TextView> textViewList;
+    private int mDefaultColor= Color.BLACK;
+    private int mActiveColor=Color.RED;
 
 
 
@@ -58,6 +70,30 @@ public class Order extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        initView();
+//        OrderActivityViewPager=(ViewPager) getActivity().findViewById(R.id.main_viewpager);
+//        bottomNavView = (BottomNavigationView) getActivity().findViewById(R.id.main_bottom_nav_view);
+//        adapter = new OrderViewAdapt(getActivity().getSupportFragmentManager());
+////        为Adapter添加Fragment
+//        adapter.addFragment(new Un_sent());
+//        adapter.addFragment(new End_sent());
+//        adapter.addFragment(new Sent_in());
+//        OrderActivityViewPager.setAdapter(adapter);
+//        OrderActivityViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+////                当 ViewPager 滑动后设置BottomNavigationView 选中相应选项
+//                bottomNavView.getMenu().getItem(position).setChecked(true);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
 
@@ -71,6 +107,8 @@ public class Order extends Fragment{
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
             parent.removeView(rootView);
+
+
         }
 
 
@@ -88,8 +126,8 @@ public class Order extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        MainActivity = getActivity();
-        inflater = LayoutInflater.from(getActivity());
+//        MainActivity = getActivity();
+//        inflater = LayoutInflater.from(getActivity());
 //        NO_SONG = (RadioButton) getActivity().findViewById(R.id.id_un_sent_BUTTON);
 //        ZAI_SONG = (RadioButton) getActivity().findViewById(R.id.id_sent_in_BUTTON);
 //        END=(RadioButton) getActivity().findViewById(R.id.id_end_sent_BUTTON);
@@ -97,15 +135,17 @@ public class Order extends Fragment{
 //        NO_SONG.setOnClickListener(this);
 //        END_SONG.setOnClickListener(this);
 //        END_SONG.setOnClickListener(this);
+
+//        mainActivityViewPager = (ViewPager) getActivity().findViewById(R.id.viewPager);
+
         End_sent = com.example.administrator.peisongyuan.Order_top.End_sent.getNewInstance();
         Un_sent = com.example.administrator.peisongyuan.Order_top.Un_sent.getNewInstance();
         Sent_in = com.example.administrator.peisongyuan.Order_top.Sent_in.getNewInstance();
-
         setDefaultFragment();
         Button NO_SONG = (Button) getActivity().findViewById(R.id.id_un_sent_BUTTON);
         Button ZAI_SONG = (Button) getActivity().findViewById(R.id.id_sent_in_BUTTON);
         Button END = (Button) getActivity().findViewById(R.id.id_end_sent_BUTTON);
-        mTransaction.replace(R.id.id_Order, un_sent);
+        mTransaction.replace(R.id.Order_reltivelayout, un_sent);
 //        initView();
    //     显示
         NO_SONG.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +153,7 @@ public class Order extends Fragment{
             public void onClick(View view) {
                 un_sent = new Un_sent();
                 mTransaction = getChildFragmentManager().beginTransaction();
-                mTransaction.replace(R.id.id_Order,Un_sent);
+                mTransaction.replace(R.id.Order_reltivelayout,Un_sent);
                 mTransaction.commit();
             }
         });
@@ -123,7 +163,7 @@ public class Order extends Fragment{
             public void onClick(View view) {
                 sent_in = new Sent_in();
                 mTransaction = getChildFragmentManager().beginTransaction();
-                mTransaction.replace(R.id.id_Order,Sent_in);
+                mTransaction.replace(R.id.Order_reltivelayout,Sent_in);
                 mTransaction.commit();
             }
         });
@@ -134,51 +174,43 @@ public class Order extends Fragment{
                 end_sent= new End_sent();
 //                Un_sent=new Un_sent();
                 mTransaction = getChildFragmentManager().beginTransaction();
-                mTransaction.replace(R.id.id_Order,End_sent);
+                mTransaction.replace(R.id.Order_reltivelayout,End_sent);
                 mTransaction.commit();
             }
         });
 
-//        Order_top.setOnClickListener(new View.OnClickListener() {
+        //        为Adapter添加Fragment
+//        OrderActivityViewPager=(ViewPager) getActivity().findViewById(R.id.main_viewpager);
+//        bottomNavView = (BottomNavigationView) getActivity().findViewById(R.id.main_bottom_nav_view);
+//        adapter = new OrderViewAdapt(getActivity().getSupportFragmentManager());
+//        adapter.addFragment(new Un_sent());
+//        adapter.addFragment(new End_sent());
+//        adapter.addFragment(new Sent_in());
+//        OrderActivityViewPager.setAdapter(adapter);
+//
+//        //设立侧滑跳转页面功能
+//        OrderActivityViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 //            @Override
-//            public void onClick(View v) {
-//                FragmentManager fm = getFragmentManager();
-//                // 开启Fragment事务
-//                FragmentTransaction transaction = fm.beginTransaction();
-////              Toast.makeText(getContext(), "in", Toast.LENGTH_SHORT).show();
-//                //String username=user.getUsername().toString();
-//                switch (v.getId()) {
-//                    case R.id.id_un_sent_BUTTON:
-//                        if (temp_position_index != UN) {
-//                            //显示
-//                            mTransaction = getChildFragmentManager().beginTransaction();
-//                            mTransaction.replace(R.id.id_Order, un_sent);
-//                            mTransaction.commit();
-//                        }
-//                        temp_position_index = IN;
-//                        break;
-//                    case R.id.id_sent_in_BUTTON:
-//                        if (temp_position_index != IN) {
-//                            //显示
-//                            mTransaction = getChildFragmentManager().beginTransaction();
-//                            mTransaction.replace(R.id.id_Order, sent_in);
-//                            mTransaction.commit();
-//                        }
-//                        temp_position_index = IN;
-//                        break;
-//                    case R.id.id_end_sent_BUTTON:
-//                        if (temp_position_index != END) {
-//                            //显示
-//                            mTransaction = getChildFragmentManager().beginTransaction();
-//                            mTransaction.replace(R.id.id_Order, end_sent);
-//                            mTransaction.commit();
-//                        }
-//                        temp_position_index = END;
-//                        break;
-//                }
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //            }
-//    });
+//
+//            @Override
+//            public void onPageSelected(int position) {
+////                当 ViewPager 滑动后设置BottomNavigationView 选中相应选项
+//                bottomNavView.getMenu().getItem(position).setChecked(true);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 }
+
+
+
+
+
 
     private void initView() {
         Order_top = (RadioGroup) getActivity().findViewById(R.id.id_Order);
@@ -188,7 +220,7 @@ public class Order extends Fragment{
 //        mTransaction.replace(R.id.id_Order,un_sent );
         sent_in = new Sent_in();
         mTransaction = getChildFragmentManager().beginTransaction();
-        mTransaction.replace(R.id.id_Order,Sent_in);
+        mTransaction.replace(R.id.Order_reltivelayout,Sent_in);
         mTransaction.commit();
         return;
     }
@@ -209,48 +241,9 @@ public class Order extends Fragment{
         //显示
         un_sent=new Un_sent();
         mTransaction = getChildFragmentManager().beginTransaction();
-        mTransaction.replace(R.id.id_Order,un_sent );
+        mTransaction.replace(R.id.Order_reltivelayout,un_sent );
         mTransaction.commit();
         return;
     }
 
-//    @Override
-//    public void onClick(View view) {
-//        FragmentManager fm = getFragmentManager();
-//        // 开启Fragment事务
-//        FragmentTransaction transaction = fm.beginTransaction();
-//
-//        // 开启Fragment事务
-////              Toast.makeText(getContext(), "in", Toast.LENGTH_SHORT).show();
-//        //String username=user.getUsername().toString();
-//        switch (view.getId()){
-//        case R.id.id_un_sent_BUTTON:
-//        if (temp_position_index != UN) {
-//            //显示
-//            mTransaction = getChildFragmentManager().beginTransaction();
-//            mTransaction.replace(R.id.id_Order,un_sent);
-//            mTransaction.commit();
-//        }
-//        temp_position_index = IN;
-//        break;
-//        case R.id.id_sent_in_BUTTON:
-//        if (temp_position_index != IN) {
-//            //显示
-//            mTransaction = getChildFragmentManager().beginTransaction();
-//            mTransaction.replace(R.id.id_Order, sent_in);
-//            mTransaction.commit();
-//        }
-//        temp_position_index = IN;
-//        break;
-//        case R.id.id_end_sent_BUTTON:
-//        if (temp_position_index != END) {
-//            //显示
-//            mTransaction = getChildFragmentManager().beginTransaction();
-//            mTransaction.replace(R.id.id_Order, end_sent);
-//            mTransaction.commit();
-//        }
-//        temp_position_index = END;
-//        break;
-//    }
-//}
 }

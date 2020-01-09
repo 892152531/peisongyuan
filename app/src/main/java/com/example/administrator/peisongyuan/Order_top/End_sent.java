@@ -2,24 +2,42 @@ package com.example.administrator.peisongyuan.Order_top;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.administrator.peisongyuan.R;
 
 
-public class End_sent extends Fragment{
+
+public class End_sent extends Fragment {
     // 缓存Fragment view
+    private RadioGroup fragement_end_relativelayout;
+    private FragmentTransaction mTransaction;
+    RadioButton Deliver_button;
+    RadioButton Finish_button;
+    RadioButton END;
+    Fragment deliver, finish;
+    private RadioGroup fragement_end;
+
+
+
     private View rootView;
     private static End_sent end_sent;
-    public End_sent(){}
-    public static End_sent getNewInstance(){
-        if (end_sent ==null){
-            end_sent =new End_sent();
+
+    public End_sent() {
+    }
+
+    public static End_sent getNewInstance() {
+        if (end_sent == null) {
+            end_sent = new End_sent();
         }
         return end_sent;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +56,4 @@ public class End_sent extends Fragment{
         }
         return rootView;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
 }
