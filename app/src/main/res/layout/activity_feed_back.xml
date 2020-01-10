@@ -10,8 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.administrator.peisongyuan.My_menu.FeedBack">
 
-    <TextView
-        android:text="反馈"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:background="@drawable/shape"
+            android:id="@+id/id_feedback_EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="8"
+            android:gravity="top"
+            android:hint="请输入您的反馈意见"
+            />
+
+        <Button
+            android:id="@+id/feedback_button"
+        android:text="提交反馈"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </RelativeLayout>

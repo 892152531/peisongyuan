@@ -50,6 +50,7 @@ public class My extends Fragment{
         super.onActivityCreated(savedInstanceState);
         TextView FeedBack = (TextView) getActivity().findViewById(R.id.id_my_feedback);
         TextView Set_up=(TextView) getActivity().findViewById(R.id.id_my_SetUp);
+        TextView Data_order=(TextView) getActivity().findViewById(R.id.id_my_DataOrder) ;
 
         FeedBack.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -63,6 +64,14 @@ public class My extends Fragment{
             @Override
             public void onClick(View v){
                 Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Set_Up.class) ;
+                startActivity(intent);
+            }
+        });
+
+        Data_order.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Data_Order.class) ;
                 startActivity(intent);
             }
         });
