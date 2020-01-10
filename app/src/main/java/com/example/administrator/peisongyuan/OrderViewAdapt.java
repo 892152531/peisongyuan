@@ -15,6 +15,8 @@ public class OrderViewAdapt extends FragmentPagerAdapter {
         super(fm);
     }
 
+
+
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);

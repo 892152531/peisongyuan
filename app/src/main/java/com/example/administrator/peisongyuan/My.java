@@ -1,11 +1,13 @@
 package com.example.administrator.peisongyuan;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 public class My extends Fragment{
@@ -43,4 +45,26 @@ public class My extends Fragment{
         super.onResume();
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView FeedBack = (TextView) getActivity().findViewById(R.id.id_my_feedback);
+        TextView Set_up=(TextView) getActivity().findViewById(R.id.id_my_SetUp);
+
+        FeedBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.FeedBack.class) ;
+                startActivity(intent);
+            }
+        });
+
+        Set_up.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Set_Up.class) ;
+                startActivity(intent);
+            }
+        });
+    }
 }

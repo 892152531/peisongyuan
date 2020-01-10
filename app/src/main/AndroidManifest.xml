@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Card.Goods_detailed" />
+        <activity android:name=".My_menu.FeedBack" />
+        <activity android:name=".My_menu.Set_Up"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@
     tools:context="com.example.administrator.peisongyuan.Order">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/main_viewpager"
+        android:id="@+id/order_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9" />

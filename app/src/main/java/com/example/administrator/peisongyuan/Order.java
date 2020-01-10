@@ -20,10 +20,11 @@ import com.example.administrator.peisongyuan.Order_top.End_sent;
 import com.example.administrator.peisongyuan.Order_top.Sent_in;
 import com.example.administrator.peisongyuan.Order_top.Un_sent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class Order extends Fragment{
+public class Order extends Fragment implements ViewPager.OnPageChangeListener {
 
     private RadioGroup mNavGroup;
     private FragmentTransaction mTransaction;
@@ -40,11 +41,8 @@ public class Order extends Fragment{
     private com.example.administrator.peisongyuan.Order_top.Un_sent un_sent;
     private com.example.administrator.peisongyuan.Order_top.End_sent end_sent;
     private LayoutInflater inflater;
-    private ViewPager ViewPager;
     private RadioGroup group;
-    ViewPager OrderActivityViewPager;
-    BottomNavigationView bottomNavView;
-    OrderViewAdapt adapter;
+    private OrderViewAdapt madapter;
 
 
     // 缓存Fragment view
@@ -53,6 +51,12 @@ public class Order extends Fragment{
     private List<TextView> textViewList;
     private int mDefaultColor= Color.BLACK;
     private int mActiveColor=Color.RED;
+    private List<Fragment> fragmentList;
+    private ViewPager mViewPager;
+//    private OrderViewAdapt mViewPager;
+    ViewPager mainActivityViewPager;
+    BottomNavigationView bottomNavView;
+    OrderViewAdapt adapter;
 
 
 
@@ -126,18 +130,6 @@ public class Order extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        MainActivity = getActivity();
-//        inflater = LayoutInflater.from(getActivity());
-//        NO_SONG = (RadioButton) getActivity().findViewById(R.id.id_un_sent_BUTTON);
-//        ZAI_SONG = (RadioButton) getActivity().findViewById(R.id.id_sent_in_BUTTON);
-//        END=(RadioButton) getActivity().findViewById(R.id.id_end_sent_BUTTON);
-//        ZAI_SONG.setOnClickListener(this);
-//        NO_SONG.setOnClickListener(this);
-//        END_SONG.setOnClickListener(this);
-//        END_SONG.setOnClickListener(this);
-
-//        mainActivityViewPager = (ViewPager) getActivity().findViewById(R.id.viewPager);
-
         End_sent = com.example.administrator.peisongyuan.Order_top.End_sent.getNewInstance();
         Un_sent = com.example.administrator.peisongyuan.Order_top.Un_sent.getNewInstance();
         Sent_in = com.example.administrator.peisongyuan.Order_top.Sent_in.getNewInstance();
@@ -146,12 +138,17 @@ public class Order extends Fragment{
         Button ZAI_SONG = (Button) getActivity().findViewById(R.id.id_sent_in_BUTTON);
         Button END = (Button) getActivity().findViewById(R.id.id_end_sent_BUTTON);
         mTransaction.replace(R.id.Order_reltivelayout, un_sent);
-//        initView();
-   //     显示
+        fragmentList= new ArrayList<>();
+        fragmentList.add(new Un_sent());
+        fragmentList.add(new Sent_in());
+        fragmentList.add(new End_sent());
+//        madapter = new OrderViewAdapt(getChildFragmentManager());
+
         NO_SONG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 un_sent = new Un_sent();
+//                mViewPager.setCurrentItem(0);
                 mTransaction = getChildFragmentManager().beginTransaction();
                 mTransaction.replace(R.id.Order_reltivelayout,Un_sent);
                 mTransaction.commit();
@@ -162,6 +159,7 @@ public class Order extends Fragment{
             @Override
             public void onClick(View view) {
                 sent_in = new Sent_in();
+//                mViewPager.setCurrentItem(1);
                 mTransaction = getChildFragmentManager().beginTransaction();
                 mTransaction.replace(R.id.Order_reltivelayout,Sent_in);
                 mTransaction.commit();
@@ -172,6 +170,7 @@ public class Order extends Fragment{
             @Override
             public void onClick(View view) {
                 end_sent= new End_sent();
+//                mViewPager.setCurrentItem(2);
 //                Un_sent=new Un_sent();
                 mTransaction = getChildFragmentManager().beginTransaction();
                 mTransaction.replace(R.id.Order_reltivelayout,End_sent);
@@ -205,7 +204,7 @@ public class Order extends Fragment{
 //
 //            }
 //        });
-}
+    }
 
 
 
@@ -246,4 +245,18 @@ public class Order extends Fragment{
         return;
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }
