@@ -20,7 +20,8 @@
         <activity android:name=".Card.Goods_detailed" />
         <activity android:name=".My_menu.FeedBack" />
         <activity android:name=".My_menu.Set_Up" />
-        <activity android:name=".My_menu.Data_Order"></activity>
+        <activity android:name=".My_menu.Data_Order" />
+        <activity android:name=".My_menu.Historical_Order"></activity>
     </application>
 
 </manifest>

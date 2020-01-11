@@ -51,11 +51,20 @@ public class My extends Fragment{
         TextView FeedBack = (TextView) getActivity().findViewById(R.id.id_my_feedback);
         TextView Set_up=(TextView) getActivity().findViewById(R.id.id_my_SetUp);
         TextView Data_order=(TextView) getActivity().findViewById(R.id.id_my_DataOrder) ;
+        TextView historical_order=(TextView) getActivity().findViewById(R.id.id_historical_order);
 
         FeedBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.FeedBack.class) ;
+                startActivity(intent);
+            }
+        });
+
+        Data_order.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Data_Order.class) ;
                 startActivity(intent);
             }
         });
@@ -68,10 +77,10 @@ public class My extends Fragment{
             }
         });
 
-        Data_order.setOnClickListener(new View.OnClickListener(){
+        historical_order.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Data_Order.class) ;
+                Intent intent=new Intent(getActivity(), com.example.administrator.peisongyuan.My_menu.Historical_Order.class) ;
                 startActivity(intent);
             }
         });

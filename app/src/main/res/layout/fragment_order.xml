@@ -8,11 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.administrator.peisongyuan.Order">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/order_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="9" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_bottom_nav_view"
         android:layout_width="match_parent"
@@ -22,6 +18,13 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/activity_main_bottom" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="0dp">
+    </android.support.v4.view.ViewPager>
     <RelativeLayout
         android:id="@+id/Order_reltivelayout"
         android:layout_width="match_parent"
@@ -87,6 +90,9 @@
             android:text="已转接"
             />
     </RadioGroup>
+
+
+
 
 
 

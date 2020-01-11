@@ -45,6 +45,8 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
     private OrderViewAdapt madapter;
 
 
+
+
     // 缓存Fragment view
     private View rootView;
     private static Order order;
@@ -52,11 +54,13 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
     private int mDefaultColor= Color.BLACK;
     private int mActiveColor=Color.RED;
     private List<Fragment> fragmentList;
-    private ViewPager mViewPager;
-//    private OrderViewAdapt mViewPager;
-    ViewPager mainActivityViewPager;
     BottomNavigationView bottomNavView;
-    OrderViewAdapt adapter;
+    OrderViewAdapt Adapter;
+
+    //test
+    private List<Fragment> list;
+    private ViewPager myViewPager;
+    private OrderViewAdapt adapter;
 
 
 
@@ -73,31 +77,6 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        initView();
-//        OrderActivityViewPager=(ViewPager) getActivity().findViewById(R.id.main_viewpager);
-//        bottomNavView = (BottomNavigationView) getActivity().findViewById(R.id.main_bottom_nav_view);
-//        adapter = new OrderViewAdapt(getActivity().getSupportFragmentManager());
-////        为Adapter添加Fragment
-//        adapter.addFragment(new Un_sent());
-//        adapter.addFragment(new End_sent());
-//        adapter.addFragment(new Sent_in());
-//        OrderActivityViewPager.setAdapter(adapter);
-//        OrderActivityViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-////                当 ViewPager 滑动后设置BottomNavigationView 选中相应选项
-//                bottomNavView.getMenu().getItem(position).setChecked(true);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
     }
 
 
@@ -138,11 +117,7 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
         Button ZAI_SONG = (Button) getActivity().findViewById(R.id.id_sent_in_BUTTON);
         Button END = (Button) getActivity().findViewById(R.id.id_end_sent_BUTTON);
         mTransaction.replace(R.id.Order_reltivelayout, un_sent);
-        fragmentList= new ArrayList<>();
-        fragmentList.add(new Un_sent());
-        fragmentList.add(new Sent_in());
-        fragmentList.add(new End_sent());
-//        madapter = new OrderViewAdapt(getChildFragmentManager());
+//        initView();
 
         NO_SONG.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,32 +153,6 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
             }
         });
 
-        //        为Adapter添加Fragment
-//        OrderActivityViewPager=(ViewPager) getActivity().findViewById(R.id.main_viewpager);
-//        bottomNavView = (BottomNavigationView) getActivity().findViewById(R.id.main_bottom_nav_view);
-//        adapter = new OrderViewAdapt(getActivity().getSupportFragmentManager());
-//        adapter.addFragment(new Un_sent());
-//        adapter.addFragment(new End_sent());
-//        adapter.addFragment(new Sent_in());
-//        OrderActivityViewPager.setAdapter(adapter);
-//
-//        //设立侧滑跳转页面功能
-//        OrderActivityViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-////                当 ViewPager 滑动后设置BottomNavigationView 选中相应选项
-//                bottomNavView.getMenu().getItem(position).setChecked(true);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
     }
 
 
@@ -211,19 +160,21 @@ public class Order extends Fragment implements ViewPager.OnPageChangeListener {
 
 
 
-    private void initView() {
-        Order_top = (RadioGroup) getActivity().findViewById(R.id.id_Order);
-        //显示
-//        un_sent=new Un_sent();
-//        mTransaction = getChildFragmentManager().beginTransaction();
-//        mTransaction.replace(R.id.id_Order,un_sent );
-        sent_in = new Sent_in();
-        mTransaction = getChildFragmentManager().beginTransaction();
-        mTransaction.replace(R.id.Order_reltivelayout,Sent_in);
-        mTransaction.commit();
-        return;
-    }
+private void initView()
+{
+    myViewPager = (ViewPager) getActivity().findViewById(R.id.myViewPager);
+    //绑定点击事件
+//        myViewPager.setOnPageChangeListener(new MyPagerChangeListener()) ;
+    //把Fragment添加到List集合里面
+    list = new ArrayList<>();
+    list.add(new Un_sent() );
+    list.add(new End_sent() );
+    list.add(new Un_sent());
+    adapter = new OrderViewAdapt(getChildFragmentManager(), list);
+    myViewPager.setAdapter(adapter);
+    myViewPager.setCurrentItem(1);  //初始化显示第一个页面
 
+}
 
 
 
