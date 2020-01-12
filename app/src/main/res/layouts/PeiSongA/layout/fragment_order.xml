@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.administrator.peisongyuan.PeiSongA.Order">
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_bottom_nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/activity_main_bottom" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="0dp">
+    </android.support.v4.view.ViewPager>
+
+    <RelativeLayout
+        android:id="@+id/Order_reltivelayout"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="450dp"
+        android:layout_below="@+id/id_Order"></RelativeLayout>
+
+
+
+
+    <RadioGroup
+        android:id="@+id/id_Order"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+   >
+
+        <RadioButton
+            android:id="@+id/id_un_sent_BUTTON"
+            android:layout_width="0dp"
+            android:checked="true"
+            android:layout_height="50dp"
+            android:background="@drawable/button_blue_background"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:clickable="true"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:onClick="switchView"
+            android:text="待取餐"
+            />
+
+        <RadioButton
+            android:id="@+id/id_sent_in_BUTTON"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_blue_background"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:onClick="switchView"
+            android:text="待送达"
+            />
+
+
+        <RadioButton
+            android:id="@+id/id_end_sent_BUTTON"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_blue_background"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:clickable="true"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:onClick="switchView"
+            android:text="已转接"
+            />
+    </RadioGroup>
+
+
+
+
+
+
+    <!-- TODO: Update blank fragment layout -->
+
+</RelativeLayout>
+
+
+

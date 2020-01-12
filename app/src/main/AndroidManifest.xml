@@ -3,6 +3,10 @@
     package="com.example.administrator.peisongyuan">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
 
     <application
         android:allowBackup="true"
@@ -10,18 +14,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Home_Page.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Card.Goods_detailed" />
-        <activity android:name=".My_menu.FeedBack" />
-        <activity android:name=".My_menu.Set_Up" />
-        <activity android:name=".My_menu.Data_Order" />
-        <activity android:name=".My_menu.Historical_Order"></activity>
+        <activity android:name=".PeiSongA.Card.Goods_detailed" />
+        <activity android:name=".PeiSongA.My_menu.FeedBack" />
+        <activity android:name=".PeiSongA.My_menu.Set_Up" />
+        <activity android:name=".PeiSongA.My_menu.Data_Order" />
+        <activity android:name=".PeiSongA.My_menu.Historical_Order" />
+        <activity android:name=".PeiSongB.PeiSongB" />
+        <activity android:name=".PeiSongA.PeiSongYuanA" />
     </application>
 
 </manifest>
