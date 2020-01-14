@@ -65,7 +65,7 @@ public class GoodsAdapt extends RecyclerView.Adapter<GoodsAdapt.ViewHolder> {
         Goods goods=mGoodsList.get(position);
         holder.goodsName.setText(goods.getShop());
         holder.goodstrade.setText(goods.getgood_name());
-        holder.goodshostel.setText(goods.getHostel());
+        holder.goodshostel.setText(goods.getaddress());
         holder.goodsprice.setText(goods.getPrice()+" ");  //int型转String型
         Glide.with(mContext).load(goods.getImageId()).into(holder.goodsImage);
     }
