@@ -1,5 +1,8 @@
 package com.example.administrator.peisongyuan.PeiSongA.Order_top;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -10,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.administrator.peisongyuan.PeiSongA.Card.Goods;
 import com.example.administrator.peisongyuan.PeiSongA.Card.GoodsAdapt;
@@ -53,6 +57,8 @@ public class Un_sent extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,7 +136,7 @@ public class Un_sent extends Fragment{
 //    };
 
     private Goods[] tests;
-    //取数据
+    //取数据并录入
     private void parseJSONWithGSON(String jsonData) {
         Log.d("MainActivity", "wellin");
         Gson gson = new Gson();
@@ -140,27 +146,14 @@ public class Un_sent extends Fragment{
         Log.d("MainActivity", "address is" + app.getaddress());
         Log.d("MainActivity", "Price is" + app.getPrice());
         Log.d("MainActivity", "Status is" + app.getStatus());
-//        goodsList.clear();
-//        tests= new Goods[]{new Goods(app.getShop(), app.getaddress(), app.getgood_name(), "1008611",
-//                Integer.parseInt(String.valueOf(app.getStatus())),
-//                10, R.drawable.cherry)};
+        goodsList.clear();
         Goods[] test={new Goods(app.getShop(), app.getaddress(), app.getgood_name(), "1008611",
                 Integer.parseInt(String.valueOf(app.getStatus())),
                 10, R.drawable.cherry)
         };
         goodsList.add(test[0]);
-//        goodsList.add(tests);
         Log.d("MainActivity", "test is" +goods[3]);
-//        goods= new Goods[]{new Goods(app.getShop(), app.getaddress(), app.getgood_name(), "18588974945",
-//                Integer.parseInt(String.valueOf(app.getStatus())),
-//                Integer.parseInt(String.valueOf(app.getPrice())), R.drawable.cherry)};
 
-
-
-//        goodsList.add(app.getShop(),app.getaddress(),app.getgood_name(),"1008611",
-//                Integer.parseInt(String.valueOf(app.getStatus())),
-//                Integer.parseInt(String.valueOf(app.getPrice())),
-//                R.drawable.cherry);
     }
 
 
@@ -191,12 +184,34 @@ public class Un_sent extends Fragment{
                     @Override
                     public void run(){
 //                        initgoods();
+                        if (isNetworkAvailable(getActivity())==false)
+                            Toast.makeText(getActivity(),"网络不可用",Toast.LENGTH_LONG).show();
                         adapter.notifyDataSetChanged();
                         swipeRefresh.setRefreshing(false);
                     }
                 });
             }
         }).start();
+    }
+
+    //检测网络连接是否可用
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null) {
+            return false;
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED
+                            || info[i].getState() == NetworkInfo.State.CONNECTING) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
 

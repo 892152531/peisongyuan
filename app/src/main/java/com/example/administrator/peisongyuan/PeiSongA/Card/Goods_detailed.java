@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,9 @@ public class Goods_detailed extends AppCompatActivity implements View.OnClickLis
 
     public static final String GOODS_SHOP="fruit_name";
     public static final String GOODS_IMAGE="fruit_image_id";
+    public static final String GOODS_PRICE="";
+   public static String GOODS_NAME;
+    public static String GOODS_PHONE;
     private Context mContext;
     private List<Goods> mGoodsList;
     CardView cardView;
@@ -34,8 +38,17 @@ public class Goods_detailed extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_goods_detailed);
         Intent intent=getIntent();
-        String fruitName=intent.getStringExtra(GOODS_SHOP);
+
+        //获取GoodsAdapt中传入的值
+        String ShopName=intent.getStringExtra(GOODS_SHOP);
+        String Price=intent.getStringExtra(GOODS_PRICE);
+        String Goods_name=intent.getStringExtra(GOODS_NAME);
+        String Goods_phone=intent.getStringExtra(GOODS_PHONE);
         int fruitImageId=intent.getIntExtra(GOODS_IMAGE,0);
+        Log.d("MainActivity", "Shop is" + intent.getStringExtra(GOODS_SHOP));
+        Log.d("MainActivity", "Price is" + intent.getStringExtra(GOODS_PRICE));
+        Log.d("MainActivity", "GOODS is" + intent.getStringExtra(GOODS_NAME));
+        Log.d("MainActivity", "PHONE is" + intent.getStringExtra(GOODS_PHONE));
         goodsName=(TextView)findViewById(R.id.id_goods_shop);
         goodstrade=(TextView)findViewById(R.id.id_trade);
         goodshostel=(TextView)findViewById(R.id.id_hostel);
@@ -51,8 +64,16 @@ public class Goods_detailed extends AppCompatActivity implements View.OnClickLis
         call_customer_phone.setOnClickListener((View.OnClickListener) this);
 //        CollapsingToolbarLayout collapsingToolbar=(CollapsingToolbarLayout)findViewById(R.id.id_deliver_shop);
 //        ImageView fruitImageView=(ImageView) findViewById(R.id.id_goods_image);
-        TextView fruitContentText=(TextView) findViewById(R.id.detailed_shop);
-        fruitContentText.setText(fruitName);
+
+        //将值传入到布局中的相应位置
+        TextView Shop_name=(TextView) findViewById(R.id.detailed_shop);
+        TextView goods_name=(TextView) findViewById(R.id.detailed_goods_name);
+        TextView price=(TextView) findViewById(R.id.detailed_price);
+        Shop_name.setText(ShopName);
+        goods_name.setText(Goods_name);
+        price.setText(Price+"元");
+//        Double.parseDouble(Price)
+
 //        setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){

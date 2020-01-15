@@ -1,13 +1,17 @@
 package com.example.administrator.peisongyuan.PeiSongB;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.peisongyuan.PeiSongA.My_menu.Historical_Order;
 import com.example.administrator.peisongyuan.PeiSongA.My_menu.Set_Up;
@@ -80,5 +84,15 @@ public class My extends Fragment{
                 startActivity(intent);
             }
         });
+    }
+    public void onReceive(Context context, Intent intent) {
+        //通过getSystemService()方法得到connectionManager这个系统服务类，专门用于管理网络连接
+        ConnectivityManager connectionManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isAvailable()) {
+            Toast.makeText(context, "网络可用", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "网络不可用", Toast.LENGTH_SHORT).show();
+        }
     }
 }
